@@ -30,19 +30,19 @@ def read_item(item_id: int, q: Union[str, None] = None):
 def store_item(name: str, price: float , offer: bool, id_item):
     url_put = url + "/" + id_item
     item1 = {"name" : name, "price": price, "is_offer": offer}
-    item_put = requests.put(url_put, json = item1)
+    item_put = requests.put(url_put, json = item1, timeout=5)
     return item_put.json()
 
 @app.delete("/del")
 def del_item(id_item: str):
     url_del = url + "/" + id_item
-    deleted = requests.delete(url_del)
+    deleted = requests.delete(url_del, timeout=5)
     return deleted.json()
 
 @app.post("/post")
 def post_item(name: str, price: float , offer: bool):
     new_item = {"name" : name, "price": price, "is_offer": offer}
-    item_post = requests.post(url, json = new_item)
+    item_post = requests.post(url, json = new_item, timeout=5)
     return item_post.json()
 
     
